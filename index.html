@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CAF debug</title>
+
+  <!-- 
+    Lib: https://repo.combateafraude.com/javascript/release/document-detector/6.5.2/document-detector-6.5.2.umd.js
+    Wasm: https://repo.combateafraude.com/javascript/release/document-detector/6.5.2/dd-validator.wasm
+  -->
+  <script src="document-detector-6.5.2.umd.js"></script>
+</head>
+
+<body>
+  CAF debug
+
+  <script type="module">
+    // Give a valid token to test the library
+    const testToken = ""
+
+    const dd = window["@combateafraude/document-detector"].DocumentDetector
+    const instance = new dd({ token: testToken })
+
+    console.log(instance)
+
+    function logPrototypeMethods(obj) {
+      let proto = Object.getPrototypeOf(obj);
+      let methods = Object.getOwnPropertyNames(proto).filter(
+        key => typeof proto[key] === 'function'
+      );
+      console.log(methods);
+    }
+
+    logPrototypeMethods(instance)
+
+  </script>
+</body>
+
+</html>
